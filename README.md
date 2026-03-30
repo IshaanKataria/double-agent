@@ -1,73 +1,65 @@
-# React + TypeScript + Vite
+Double Agent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+One of your agents has been turned. You have 6 minutes to find the mole.
 
-Currently, two official plugins are available:
+A social deduction game where you interrogate 4 AI-powered spies to identify a traitor. Every agent is played by Claude with a distinct personality and knowledge scope. The mole lies convincingly but their story contradicts what other agents witnessed. Cross-reference statements, pin evidence, and accuse the mole before time runs out.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built for Hackiethon 2026 (HackMelbourne).
 
-## React Compiler
+How to Run
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Prerequisites: Node.js 18+, an Anthropic API key
 
-## Expanding the ESLint configuration
+    git clone https://github.com/IshaanKataria/double-agent.git
+    cd double-agent
+    npm install
+    npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Open http://localhost:5173 and enter your Anthropic API key to start.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Alternatively, create a .env file with your key to auto-fill it:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+    VITE_ANTHROPIC_API_KEY=sk-ant-...
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Tech Stack
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- React + TypeScript
+- Vite (build tool)
+- Tailwind CSS v4 (styling)
+- Claude API via @anthropic-ai/sdk (claude-sonnet-4-6)
+- Web Audio API (ambient audio and SFX)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+How AI is Used
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The AI is not an add-on. Without it, the game cannot function. Claude powers 9 integration points:
+
+1. Scenario Generation - AI creates the entire mission, timeline, agents, mole identity, and planted contradictions. Every playthrough is unique.
+
+2. Character Roleplay - AI plays all 4 agents simultaneously with distinct personalities and speech patterns. Each agent only shares what they personally witnessed.
+
+3. Mole Deception - The mole AI follows an 80/20 truth-to-lies ratio, uses behavioral tells (hesitation, deflection, suspiciously specific details), and stays internally consistent while contradicting other agents.
+
+4. Tone-Reactive Responses - Agents react differently to Friendly, Direct, and Aggressive questioning tones.
+
+5. Composure System - Each response includes a hidden composure score. The mole's composure drops when questions approach their lies, creating an ambiguous signal for the player.
+
+6. Consensus Check - Sends the same question to all 4 agents in parallel. Responses displayed side-by-side for direct comparison. Limited to 2 uses per game.
+
+7. Evidence Cross-Referencing - Full conversation history is maintained per agent, enabling natural contradictions to surface when asking different agents about the same events.
+
+8. Accusation Evaluation - AI generates the mole's final reaction based on whether they were correctly identified and what evidence was presented.
+
+9. Complete Replayability - New mission, new agents, new mole, new contradictions every game. No two playthroughs are the same.
+
+Game Features
+
+- 4 AI agents with wildly different personalities
+- Free-form natural language interrogation
+- Questioning tones: Friendly / Direct / Aggressive
+- Draggable evidence board with connection lines
+- Consensus check for side-by-side comparison
+- Composure meters per agent
+- 6-minute countdown with audio urgency escalation
+- Staged cinematic reveal with mole confrontation
+- Investigation stats and post-game debrief
+- Noir visual aesthetic with scanlines, film grain, and vignette
